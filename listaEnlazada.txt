@@ -1,0 +1,94 @@
+class Nodo {
+    constructor(dato, enlace = null) {
+        this.dato = dato;
+        this.enlace = enlace;
+    }
+}
+
+class Lista {
+    constructor() {
+        this.primero = null;
+    }
+
+    insertarCabezaLista(entrada) {
+        const nuevo = new Nodo(entrada, this.primero);
+        this.primero = nuevo;
+    }
+
+    visualizar() {
+        let n = this.primero;
+        const elementos = [];
+        while (n !== null) {
+            elementos.push(n.dato);
+            n = n.enlace;
+        }
+        console.log(elementos.join(' '));
+    }
+
+    invertir() {
+        let prev = null, current = this.primero, next = null;
+        while (current !== null) {
+            next = current.enlace;
+            current.enlace = prev;
+            prev = current;
+            current = next;
+        }
+        this.primero = prev;
+    }
+
+    eliminarDuplicados() {
+        let actual = this.primero;
+        const valores = new Set();
+        let anterior = null;
+        
+        while (actual !== null) {
+            if (valores.has(actual.dato)) {
+                anterior.enlace = actual.enlace;
+            } else {
+                valores.add(actual.dato);
+                anterior = actual;
+            }
+            actual = actual.enlace;
+        }
+    }
+
+   obtenerDesdeElFinal(n) {
+    if (!this.primero || n <= 0) return null;
+
+    let principal = this.primero;
+    let secundario = this.primero;
+
+    // Mover el puntero principal n posiciones adelante
+    for (let i = 0; i < n; i++) {
+        if (!principal) return null; // Si n es mayor que la longitud de la lista
+        principal = principal.enlace;
+    }
+
+    // Mover ambos punteros hasta que principal llegue al final
+    while (principal) {
+        principal = principal.enlace;
+        secundario = secundario.enlace;
+    }
+
+    return secundario ? secundario.dato : null;
+}
+
+// Pruebas
+const lista = new Lista();
+lista.insertarCabezaLista(3);
+lista.insertarCabezaLista(1);
+lista.insertarCabezaLista(2);
+lista.insertarCabezaLista(1);
+
+console.log("Lista original:");
+lista.visualizar();
+
+lista.invertir();
+console.log("\nDespués de invertir:");
+lista.visualizar();
+
+lista.eliminarDuplicados();
+console.log("\nDespués de eliminar duplicados:");
+lista.visualizar();
+
+console.assert(lista.obtenerDesdeElFinal(1) === 3, "Error en obtenerDesdeElFinal");

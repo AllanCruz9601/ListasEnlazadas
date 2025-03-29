@@ -1,0 +1,3 @@
+Node.js: Es un entorno de ejecución para JavaScript que permite ejecutar código fuera del navegador. Se basa en el motor V8 de Chrome, lo que lo hace rápido y eficiente. Se usa principalmente para desarrollar aplicaciones de servidor, APIs y herramientas de línea de comandos.
+
+npm (Node Package Manager): Es el administrador de paquetes de Node.js. Permite instalar, actualizar y gestionar bibliotecas y módulos de terceros, facilitando el desarrollo con herramientas y frameworks como Express, React, y Jest.
